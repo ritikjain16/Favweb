@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="icon" href="">
+
+    <meta name="theme-color" content="#e30a64">
+    <meta name="msapplication-navbutton-color" content="#e30a64">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+
+
+    <title>Fav Web Series</title>
+    <title>FavWebSeries</title>
+    
+    <style>
+        * {
+            font-family: 'Roboto Slab', serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #myInput {
+            width: 200px;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 3px solid #e30a64;
+            border-radius: 5px;
+            margin-bottom: 12px;
+        }
+
+        .inp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 5px;
+            margin: 5px;
+        }
+
+        #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-top: 35px;
+
+        }
+
+        #myUL li a {
+            border: 1px solid #ddd;
+            margin-top: -1px;
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            display: block;
+
+        }
+
+        /* -------------------------------- */
+        .container {
+            width: 200px;
+            height: 250px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            padding: 10px;
+
+        }
+
+
+        .title {
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            text-shadow: 4px 3px 4px #e30a64;
+
+        }
+
+        .container img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            transition-property: all;
+            transition-duration: 0.4s;
+        }
+
+        .container img:hover {
+            width: 190px;
+            height: 190px;
+        }
+
+        .container h1 {
+            display: none;
+        }
+
+        .container h3,
+        h4 {
+            text-align: center;
+            font-size: 15px;
+        }
+
+        @media only screen and (max-width:500px) {
+            .container {
+                width: 150px;
+                height: 200px;
+                padding: 3px;
+                margin: 7px;
+            }
+
+            .container img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .container img:hover {
+                width: 130px;
+                height: 130px;
+            }
+
+            .container h3,
+            h4 {
+                text-align: center;
+                font-size: 12px;
+            }
+
+            .title {
+                font-size: 20px;
+            }
+
+            .myFooter {
+                padding: 2px;
+            }
+
+        }
+
+        /* ------------------------------------- */
+        .myFooter {
+            background-color: #e30a64;
+            color: white;
+            padding: 4px;
+            position: sticky;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .myFooter h3,
+        h4 {
+            margin: 3px;
+            font-size: 13px;
+        }
+
+        .myFooter a {
+            text-decoration: none;
+            color: white;
+        }
+
+        @keyframes bodyanimation {
+            from {
+                background-color: white;
+            }
+
+            to {
+                background-color: black;
+            }
+        }
+
+        @keyframes bodyanimation1 {
+            from {
+                background-color: black;
+            }
+
+            to {
+                background-color: white;
+            }
+        }
+
+        @keyframes ButtonAnimation {
+            0% {
+                right: 25px;
+            }
+
+            10% {
+                right: 10px;
+            }
+
+            20% {
+                right: 25px;
+            }
+
+            30% {
+                right: 10px;
+            }
+
+            40% {
+                right: 25px;
+            }
+
+            50% {
+                right: 10px;
+            }
+
+            60% {
+                right: 25px;
+            }
+
+            100% {
+                right: 10px;
+            }
+        }
+
+
+
+        .btn {
+            background-color: #e30a64;
+            color: white;
+            padding: 8px;
+            border-style: none;
+            border-radius: 4px;
+            transition-property: all;
+            transition-duration: 0.5s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            color: black;
+            font-weight: bold;
+
+        }
+
+        #light,
+        #dark {
+            position: fixed;
+            right: 15px;
+        }
+    </style>
+</head>
+
+<body id="myBody">
+
+
+    <h1 class="title" id="title">Download/Play your Favourite web series or movie in just one Tap!..</h1>
+    <div class="inp">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search ...">
+    </div>
+    <button type="button" class="btn" id="light" onclick="light()">Light Mode</button>
+    <button type="button" class="btn" id="dark" onclick="dark()">Dark Mode</button>
+
+    <ul id="myUL">
+        {% for i in movie123 %}
+
+        <div class="container">
+            <h1>{{i.movieName}}</h1>
+            <a href="/media/{{i.movieVideo}}" target="_blank" download><img src="{{i.movieUrl}}" alt="{{i.movieName}}"></a>
+            <h3>{{i.movieName}}</h3>
+            <h3>{{i.movieSize}} MB</h3>
+        </div>
+
+        {% endfor %}
+
+    </ul>
+
+    <footer class="myFooter">
+        <a href="about/">
+            <h4 id="myAbout">About Us</h4>
+        </a>
+        <h4>Copyright &copy; 2021 By RJ</h4>
+    </footer>
+
+   
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, ul, i, txtValue, div, h1;
+
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+
+            ul = document.getElementById("myUL");
+            div = ul.getElementsByTagName("div");
+
+
+
+            for (i = 0; i < div.length; i++) {
+                h1 = div[i].getElementsByTagName("h1")[0];
+                txtValue = h1.textContent || h1.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    div[i].style.display = "flex";
+                } else {
+                    div[i].style.display = "none";
+                }
+            }
+        }
+
+
+        var myDate = new Date();
+
+        myHour = myDate.getHours();
+
+        if (myHour > 7 && myHour < 20) {
+
+            document.getElementById("light").style.display = "none"
+            document.getElementById("dark").style.display = "block"
+            document.getElementById("dark").style.animation = "ButtonAnimation 2s 1"
+
+
+            // document.getElementById("myBody").style.animation="bodyanimation1 2s 1"
+            document.getElementById("myBody").style.backgroundColor = "white"
+            document.getElementById("title").style.color = "black"
+
+
+            var myElements = document.getElementsByTagName('h3');
+
+            for (var i = 0; i < myElements.length; i++) {
+                myElements[i].style.color = 'black';
+            }
+
+        }
+        else {
+            document.getElementById("light").style.display = "block"
+            document.getElementById("dark").style.display = "none"
+            document.getElementById("light").style.animation = "ButtonAnimation 2s 1"
+
+            // document.getElementById("myBody").style.animation="bodyanimation 2s 1"
+            document.getElementById("myBody").style.backgroundColor = "black"
+            document.getElementById("title").style.color = "white"
+
+            var myElements = document.getElementsByTagName('h3');
+
+
+            for (var i = 0; i < myElements.length; i++) {
+                myElements[i].style.color = 'white';
+            }
+        }
+
+
+        function light() {
+
+            document.getElementById("light").style.display = "none"
+            document.getElementById("dark").style.display = "block"
+            document.getElementById("dark").style.animation = "ButtonAnimation 2s 1"
+
+            document.getElementById("myBody").style.animation = "bodyanimation1 2s 1"
+            document.getElementById("myBody").style.backgroundColor = "white"
+            document.getElementById("title").style.color = "black"
+
+            var myElements = document.getElementsByTagName('h3');
+
+
+            for (var i = 0; i < myElements.length; i++) {
+                myElements[i].style.color = 'black';
+            }
+        }
+
+        function dark() {
+
+            document.getElementById("light").style.display = "block"
+            document.getElementById("dark").style.display = "none"
+            document.getElementById("light").style.animation = "ButtonAnimation 2s 1"
+
+            document.getElementById("myBody").style.animation = "bodyanimation 2s 1"
+            document.getElementById("myBody").style.backgroundColor = "black"
+            document.getElementById("title").style.color = "white"
+
+            var myElements = document.getElementsByTagName('h3');
+
+
+            for (var i = 0; i < myElements.length; i++) {
+                myElements[i].style.color = 'white';
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
