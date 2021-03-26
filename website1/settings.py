@@ -27,7 +27,7 @@ SECRET_KEY = 'kr#*w+3(1@ot5kyq7&#ncr9==dvr=k#jng!lw&&t5ppb67$^#h'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','favwebseries.herokuapp.com']
 
 
 # Application definition
